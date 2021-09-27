@@ -13,7 +13,18 @@ public class Obstacle extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
+    public abstract class Obstacle extends Actor
     {
-        // Add your action code here.
+    protected abstract void fall();
+    
+    //Returns true if the child object is on the ground,
+    //false otherwise
+    protected boolean isOnGround()
+    {
+        Actor ground = getOneObjectAtOffset(0, getImage().getHeight() /
+                                            2, Platform.class);
+        return ground != null;
+    }
+    }
     }
 }

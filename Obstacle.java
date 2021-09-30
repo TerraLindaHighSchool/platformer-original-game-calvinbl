@@ -12,8 +12,8 @@ public class Obstacle extends Actor
      * Act - do whatever the Obstacle wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void act()
-    public abstract class Obstacle extends Actor
+     public void act();
+     public abstract class Obstacle extends Actor
     {
     protected abstract void fall();
     
@@ -25,6 +25,20 @@ public class Obstacle extends Actor
                                             2, Platform.class);
         return ground != null;
     }
-    }
+    
+    //Some child objects fall. This method removes the object
+    //once it is out of bounds
+    protected void removeOutOfBounds(Obstacle obstacle)
+    {
+        if(obstacle.getY() > getWorld().getHeight() +
+                              obstacle.getImage().getWidth() / 2)
+        {
+            getWorld().removeObject(obstacle);
+        }
     }
 }
+    
+    
+
+    
+

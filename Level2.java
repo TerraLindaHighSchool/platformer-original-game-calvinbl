@@ -13,8 +13,26 @@ public class Level2 extends World
      * 
      */
     public Level2()
-    {    
-        // Create a new world with 1200x800 cells with a cell size of 1x1 pixels.
+{    
+private void onCollision( )
+{
+    if(isTouching(Door.class))
+    {
+        World world = null;
+        try 
+        {
+            world = (World) NEXT_LEVEL.newInstance();
+        }   
+        catch (InstantiationException e) 
+        {
+            System.out.println("Class cannot be instantiated");
+        } catch (IllegalAccessException e) {
+            System.out.println("Cannot access class constructor");
+        } 
+        Greenfoot.setWorld(world);
+    }
+}
+    {        
         super(1200, 800, 1); 
     }
 }

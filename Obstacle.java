@@ -14,7 +14,7 @@ public class Obstacle extends Actor
      */
      public void act();
      public abstract class Obstacle extends Actor
-    {
+{
     protected abstract void fall();
     
     //Returns true if the child object is on the ground,
@@ -36,9 +36,4 @@ public class Obstacle extends Actor
             getWorld().removeObject(obstacle);
         }
     }
-}
-    
-    
-
-    
-
+}    

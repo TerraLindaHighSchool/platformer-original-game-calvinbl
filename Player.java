@@ -11,6 +11,7 @@ public class Player extends Actor
         private int speed;
         private int walkIndex;
         private int frame;
+        private int healthCount;
         private float yVelocity;
         private boolean isWalking;
         private boolean isJumping;
@@ -22,7 +23,7 @@ public class Player extends Actor
         private final Class NEXT_LEVEL;
         private final GreenfootSound MUSIC;
         
-        public Player(int speed, float jumpForce, float gravity, int MaxHealth,
+        public Player(int speed, float jumpForce, float gravity, int maxHealth,
                       int maxPowerUp, Class nextLevel, GreenfootSound music)
         
         {
@@ -45,12 +46,8 @@ public class Player extends Actor
                                  new GreenfootImage("walk4.png"),
                                  new GreenfootImage("walk5.png"),
                              };
-        int sum = 0;                    
-        for(int i = 1; i <= 4; i++)
-        {
-            sum += i;
-        }
-        System.out.println(sum);
+        
+        
         }
         
         public void act()

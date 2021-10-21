@@ -16,7 +16,7 @@ private final float GRAVITY;
         GRAVITY = gravity;
     }
     
-    protected void fall()
+    public void act()
     {
         fall();
     }

@@ -16,14 +16,17 @@ public class Bomb extends Obstacle
         GRAVITY = gravity;
     }
     
-    protected void fall()
+    public void act()
     {
         fall();
     }
     
     protected void fall()
-    {
-        yVelocity += GRAVITY;
-        setLocation(getX(), getY() + (int) yVelocity);
+    {   
+        if(!isOnGround())
+        {
+            yVelocity += GRAVITY;
+            setLocation(getX(), getY() + (int) yVelocity);
+        }
     }
-}
+}    

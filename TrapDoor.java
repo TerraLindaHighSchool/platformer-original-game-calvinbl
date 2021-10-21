@@ -19,6 +19,5 @@ private float yVelocity;
     protected void fall()
     {}
 
-    protected void fall()
-    {}
+
 }

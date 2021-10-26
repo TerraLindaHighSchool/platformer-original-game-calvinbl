@@ -22,6 +22,7 @@ public class Player extends Actor
         private final float GRAVITY;
         private final Class NEXT_LEVEL;
         private final GreenfootSound MUSIC;
+        int sum= 0;
         
         public Player(int speed, float jumpForce, float gravity, int maxHealth,
                       int maxPowerUp, Class nextLevel, GreenfootSound music)
@@ -70,28 +71,32 @@ public class Player extends Actor
         }
         
         private void walk() 
-    {
+        {
         if(isWalking)
-        {
-            animator();
-        }
-        else
-        {
-            setImage(STANDING_IMAGE);
-            walkIndex = 0;
-        }
-        
+            {
+                animator();
+            }
+            else
+            {
+                setImage(STANDING_IMAGE);
+                walkIndex = 0;
+            }
+            
         if(Greenfoot.isKeyDown("right"))
         {
-            if(!isFacingLeft)
+            if(isFacingLeft)
             {
                 mirrorImages();
             }
             isWalking = true;
-            isFacingLeft = true;
+            isFacingLeft = false;
             move(speed);
-    }
-        
+            if(!MUSIC.isPlaying())
+            {
+                MUSIC.playLoop();
+            }
+        }
+            
         if(Greenfoot.isKeyDown("left"))
         {
         if(!isFacingLeft)
@@ -101,14 +106,15 @@ public class Player extends Actor
         isWalking = true;
         isFacingLeft = true;
         move(-speed);
-    }
-    
-    if(!Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("left"))
-        {
-            isWalking = false;
         }
         
+        if(!(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("left")))
+            {
+                isWalking = false;
+            }
+            
     }
+    
     private void jump()
     {
         if(Greenfoot.isKeyDown("space") && isOnGround())
@@ -127,6 +133,7 @@ public class Player extends Actor
             isJumping = false;
         }
     }
+    
     private void fall()
     {
         if(!isJumping && !isOnGround())
@@ -139,36 +146,52 @@ public class Player extends Actor
     private void animator() 
     {
         if(frame % (15 - 2 * speed) == 0)
-     
         {
-            setImage(WALK_ANIMATION[walkIndex]);
-            walkIndex++;
-        }
-        else
-        {    
-            walkIndex = 0;
+            if(walkIndex < WALK_ANIMATION.length)
+            {
+                setImage(WALK_ANIMATION[walkIndex]);
+                walkIndex++;
+            }
+            else
+            {    
+                walkIndex = 0;
+            }
         }
         frame++;
     }
         
     private void onCollision()
     {
-    if(isTouching(Door.class))
-    {
-        World world = null;
-        try 
+        if(isTouching(Door.class))
         {
-            world = (World) NEXT_LEVEL.newInstance();
-        }   
-        catch (InstantiationException e) 
+            World world = null;
+            try 
+            {
+                world = (World) NEXT_LEVEL.newInstance();
+            }   
+            catch (InstantiationException e) 
+            {
+                System.out.println("Class cannot be instantiated");
+            } catch (IllegalAccessException e) {
+                System.out.println("Cannot access class constructor");
+            } 
+            Greenfoot.setWorld(world);
+        }
+        
+        if(isTouching(Obstacle.class))
         {
-            System.out.println("Class cannot be instantiated");
-        } catch (IllegalAccessException e) {
-            System.out.println("Cannot access class constructor");
-        } 
-        Greenfoot.setWorld(world);
+            removeTouching(Obstacle.class);
+            getWorld().removeObject(health[healthCount - 1]);
+            healthCount--;
+        }
+        
+        if(isTouching(Platform.class) && !isOnGround())
+        {
+            yVelocity = -1;
+            fall();
+        }
     }
-    }
+    
     private void mirrorImages()
     {
         for(int i = 0; i < WALK_ANIMATION.length; i++)
@@ -188,6 +211,15 @@ public class Player extends Actor
     {
         Actor ground = getOneObjectAtOffset(0, getImage().getHeight() / 2, Platform.class);
         return ground !=null;
+    }
+    public void addedToWorld(World world)
+    {
+        health[0]=new Health();
+        world.addObject(health[0],30,50);
+        health[1]=new Health();
+        world.addObject(health[1],72, 50);
+        health[2]=new Health();
+        world.addObject(health[2],114,50);
     }
 }    
     

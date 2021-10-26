@@ -16,6 +16,9 @@ private float yVelocity;
         GRAVITY = gravity;
     }
     
+    public void act()
+    {}
+    
     protected void fall()
     {}
 

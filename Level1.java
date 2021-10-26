@@ -35,8 +35,8 @@ public class Level1 extends World
         Door door = new Door();
         addObject(door,1171,44);
         Player player = new Player(SPEED, JUMP_FORCE, GRAVITY,
-                                   MAX_HEALTH, MAX_POWERUP, NEXT_LEVEL, MUSIC);
-        
+                MAX_HEALTH, MAX_POWERUP, NEXT_LEVEL, MUSIC);
+
         addObject(player,96,750);
         addObject(new Floor(), 600, 800);
         addObject(new BrickWall(),380, 500);

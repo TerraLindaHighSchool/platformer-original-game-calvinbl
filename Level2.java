@@ -41,20 +41,28 @@ public class Level2 extends World
         addObject(player,96,750);
         addObject(new Floor(), 600, 800);
         addObject(new BrickWall(),380, 500);
-        addObject(new BrickWall(), 780, 300);
+        
         addObject(new BrickWall(), 960, 100);
         addObject(new SmBrickWall(), 1120, 600);
         addObject(new SmBrickWall(), 880, 600);
-        addObject(new SmBrickWall(),420, 160);
+        
         addObject(new SmBrickWall(),1000, 200);
-        addObject(new SmBrickWall(),220, 280);
+        
         addObject(new TrapDoor(GRAVITY), 60, 400);
-        addObject(new TrapDoor(GRAVITY), 1000, 600);
-        addObject(new Bomb(GRAVITY), 455, 114);
-        addObject(new Bomb(GRAVITY), 1060, 544);
+        
+        
+    
         addObject(new Gem(), 975, 160);
         addObject(new Gem(), 1030, 160);
 
+        
+        BrickWall brickWall2 = new BrickWall();
+        addObject(brickWall2,239,319);
+
+        SmBrickWall smBrickWall3 = new SmBrickWall();
+        addObject(smBrickWall3,538,155);
+        TrapDoor trapDoor = new TrapDoor(0.0667f);
+        addObject(trapDoor,412,155);
     }
     
     private void spawn()

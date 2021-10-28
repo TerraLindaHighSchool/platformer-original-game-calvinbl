@@ -215,11 +215,11 @@ public class Player extends Actor
     public void addedToWorld(World world)
     {
         health[0]=new Health();
-        world.addObject(health[0],30,50);
+        world.addObject(health[0],30,40);
         health[1]=new Health();
-        world.addObject(health[1],72, 50);
+        world.addObject(health[1],72, 40);
         health[2]=new Health();
-        world.addObject(health[2],114,50);
+        world.addObject(health[2],114,40);
     }
 }    
     
